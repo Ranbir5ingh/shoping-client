@@ -65,8 +65,7 @@ const HeroSection = () => {
             Professionally designed, ATS-optimized resume templates that have
             helped
             <span className="font-semibold text-emerald-600 font-Inter">
-              {" "}
-              500+ developers{" "}
+              {" "}500+ developers{" "}
             </span>
             get hired at top companies like Google, Microsoft, and startups.
           </p>
@@ -78,6 +77,13 @@ const HeroSection = () => {
               onClick={() => initiatePayment(course)}
             >
               Get ResumeKit Pro - ₹499
+            </div>
+            {/* Secondary CTA - Demoted to ghost/text variant */}
+            <div
+              className="text-indigo-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-toboggan-medium text-base sm:text-lg text-center cursor-pointer border-2 border-transparent hover:underline"
+              onClick={() => initiatePayment(course)}
+            >
+              Learn More
             </div>
           </div>
 
@@ -93,9 +99,8 @@ const HeroSection = () => {
               4.9★ Rating
             </div>
 
-
             {/* Badge 3 */}
-             <div className="inline-flex items-center border  border-indigo-100 text-indigo-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium font-Inter">
+            <div className="inline-flex items-center border  border-indigo-100 text-indigo-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium font-Inter">
               24hr Support
             </div>
           </div>
@@ -111,12 +116,11 @@ const HeroSection = () => {
               {images.map((src, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                    index === currentSlide
-                      ? "translate-x-0 scale-100"
-                      : index < currentSlide
-                      ? "-translate-x-full scale-95"
-                      : "translate-x-full scale-95"
+                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${index === currentSlide
+                    ? "translate-x-0 scale-100"
+                    : index < currentSlide
+                    ? "-translate-x-full scale-95"
+                    : "translate-x-full scale-95"
                   }`}
                 >
                   <img
@@ -148,10 +152,9 @@ const HeroSection = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 border ${
-                    index === currentSlide
-                      ? "bg-indigo-600 w-4 sm:w-8 border-indigo-600"
-                      : "bg-white/60 border-white"
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 border ${index === currentSlide
+                    ? "bg-indigo-600 w-4 sm:w-8 border-indigo-600"
+                    : "bg-white/60 border-white"
                   }`}
                 />
               ))}
