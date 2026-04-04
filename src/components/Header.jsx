@@ -1,7 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { X, Ellipsis } from "lucide-react";
+import { X } from "lucide-react";
 import gsap from "gsap";
+
+// Hamburger SVG (replace Ellipsis)
+const HamburgerIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-menu"
+  >
+    <line x1="4" x2="20" y1="12" y2="12" />
+    <line x1="4" x2="20" y1="6" y2="6" />
+    <line x1="4" x2="20" y1="18" y2="18" />
+  </svg>
+);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,11 +110,7 @@ export default function Header() {
                       navigate("/");
                     }
                   }}
-                  className={`font-medium text-[0.95rem] sm:text-[0.875rem] md:text-[0.95rem] lg:text-[1rem] font-toboggan-regular transition-all ${
-                    isActive(item.path)
-                      ? "text-[#0a0a0a]"
-                      : "text-black/70 hover:text-[#0a0a0a]"
-                  }`}
+                  className={`font-medium text-[0.95rem] sm:text-[0.875rem] md:text-[0.95rem] lg:text-[1rem] font-toboggan-regular transition-all ${isActive(item.path) ? "text-[#0a0a0a]" : "text-black/70 hover:text-[#0a0a0a]"}`}
                 >
                   {item.label}
                 </button>
@@ -102,11 +118,7 @@ export default function Header() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`font-medium text-[0.95rem] sm:text-[0.875rem] md:text-[0.95rem] lg:text-[1rem] font-toboggan-regular transition-all ${
-                    isActive(item.path)
-                      ? "text-[#0a0a0a]"
-                      : "text-black/70 hover:text-[#0a0a0a]"
-                  }`}
+                  className={`font-medium text-[0.95rem] sm:text-[0.875rem] md:text-[0.95rem] lg:text-[1rem] font-toboggan-regular transition-all ${isActive(item.path) ? "text-[#0a0a0a]" : "text-black/70 hover:text-[#0a0a0a]"}`}
                 >
                   {item.label}
                 </Link>
@@ -118,9 +130,11 @@ export default function Header() {
           <div className="lg:hidden">
             <button
               onClick={handleOpenMenu}
-              className="text-[#0a0a0a] hover:text-black/70 transition-colors"
+              className="text-[#0a0a0a] hover:text-black/70 transition-colors flex items-center space-x-1"
             >
-              <Ellipsis size={24} />
+              <HamburgerIcon />
+              <span className="sr-only">Open menu</span> {/* Visually hidden span */}
+              <span className="sm:hidden">Menu</span> {/* Visible label for viewports < 768px */}
             </button>
           </div>
         </div>
