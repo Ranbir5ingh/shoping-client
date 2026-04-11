@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { X, Ellipsis } from "lucide-react";
+import { X, Ellipsis, Hamburger, Menu } from "lucide-react";
 import gsap from "gsap";
 
 export default function Header() {
