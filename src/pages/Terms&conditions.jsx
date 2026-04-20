@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TermsConditions = () => {
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggleSection = (sectionId) => {
+    setOpenSection(openSection === sectionId ? null : sectionId);
+  };
+
+  const AccordionItem = ({ id, title, children }) => (
+    <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 mb-4">
+      <button
+        className="w-full text-left flex justify-between items-center focus:outline-none"
+        onClick={() => toggleSection(id)}
+      >
+        <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold font-toboggan-medium">
+          {title}
+        </h2>
+        <span className="text-2xl">
+          {openSection === id ? "-" : "+"}
+        </span>
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${openSection === id ? "max-h-screen opacity-100 pt-4" : "max-h-0 opacity-0"}`}
+      >
+        <div className="text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
@@ -10,7 +39,7 @@ const TermsConditions = () => {
             Terms & Conditions
           </h1>
           <p className="text-black/70 text-[1.05rem] sm:text-[1.1rem] md:text-[1.125rem] mt-4 leading-relaxed max-w-2xl mx-auto">
-            Please read these terms carefully before using our services and purchasing our products.
+            Welcome to ResumeKit Pro! This document outlines the terms and conditions governing your use of our website, services, and products. By accessing or using our offerings, you agree to abide by these terms. Please read them carefully to understand your rights and responsibilities.
           </p>
           <div className="text-black/50 text-[0.95rem] mt-3">
             Last updated: January 2025
@@ -22,23 +51,13 @@ const TermsConditions = () => {
       <section className="text-[#0a0a0a] px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="space-y-8 sm:space-y-10">
           
-          {/* Acceptance of Terms */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              1. Acceptance of Terms
-            </h2>
-            <div className="text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
-              <p>
-                By accessing and using ResumeKit Pro, purchasing our products, or using our services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website or services.
-              </p>
-            </div>
-          </div>
+          <AccordionItem id="acceptance" title="1. Acceptance of Terms">
+            <p>
+              By accessing and using ResumeKit Pro, purchasing our products, or using our services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website or services.
+            </p>
+          </AccordionionItem>
 
-          {/* Product License */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              2. Product License & Usage
-            </h2>
+          <AccordionItem id="license" title="2. Product License & Usage">
             <div className="space-y-4 text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 Upon purchase, you receive a personal, non-exclusive license to use our resume templates and resources for your own career advancement purposes.
@@ -62,13 +81,9 @@ const TermsConditions = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Payment & Refunds */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              3. Payment & Refunds
-            </h2>
+          <AccordionItem id="payment" title="3. Payment & Refunds">
             <div className="space-y-4 text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 We use UPI (Unified Payments Interface) for secure payments. When you click "Buy Now," you'll be redirected via a UPI link that opens your default UPI app or prompts you to choose from available UPI apps on your device. After completing payment, you'll return to our website to confirm your payment details.
@@ -89,13 +104,9 @@ const TermsConditions = () => {
                 <strong className="text-black/90">Digital Products:</strong> Due to our manual verification process, all sales are final once products are delivered. However, if you experience technical issues with payment verification or download, please contact our support team within 7 days of purchase.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Delivery */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              4. Product Delivery
-            </h2>
+          <AccordionItem id="delivery" title="4. Product Delivery">
             <div className="space-y-4 text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 Due to our manual payment verification process, digital products are delivered via email <strong className="text-black/90">within 24 hours</strong> after payment confirmation and verification. You will receive download links at the email address provided during checkout.
@@ -104,25 +115,17 @@ const TermsConditions = () => {
                 Please ensure your email address is correct and check spam folders if you don't receive your download link within 24 hours of payment verification. Our automated system will send your ResumeKit Pro templates once payment is confirmed.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Intellectual Property */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              5. Intellectual Property
-            </h2>
+          <AccordionItem id="ip" title="5. Intellectual Property">
             <div className="text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 All content, designs, templates, text, graphics, and other materials provided by ResumeKit Pro are protected by copyright and other intellectual property laws. We retain all rights, title, and interest in our products and website content.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Disclaimers */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              6. Disclaimers
-            </h2>
+          <AccordionItem id="disclaimers" title="6. Disclaimers">
             <div className="space-y-4 text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 While we strive to provide high-quality resume templates and resources, we cannot guarantee specific job search outcomes. Success in job applications depends on many factors beyond resume design.
@@ -131,33 +134,24 @@ const TermsConditions = () => {
                 Our products are provided "as is" without warranties of any kind. We do not guarantee compatibility with all software versions or platforms, though we test our templates thoroughly.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Limitation of Liability */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              7. Limitation of Liability
-            </h2>
+          <AccordionItem id="liability" title="7. Limitation of Liability">
             <div className="text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 In no event shall ResumeKit Pro be liable for any indirect, incidental, special, or consequential damages arising from your use of our products or services. Our total liability shall not exceed the amount you paid for the specific product in question.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Modifications */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
-              8. Modifications to Terms
-            </h2>
+          <AccordionItem id="modifications" title="8. Modifications to Terms">
             <div className="text-black/70 text-[1rem] sm:text-[1.05rem] leading-relaxed">
               <p>
                 We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting on our website. Continued use of our services after changes constitutes acceptance of the modified terms.
               </p>
             </div>
-          </div>
+          </AccordionItem>
 
-          {/* Contact Information */}
           <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-6 sm:p-8 border border-indigo-100">
             <h2 className="text-[1.6rem] sm:text-[1.8rem] md:text-[2rem] font-bold mb-4 font-toboggan-medium">
               Contact Us
